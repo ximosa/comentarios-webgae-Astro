@@ -1,0 +1,23 @@
+name: Notificación de nuevos comentarios
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar correo con nuevo comentario
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.EMAIL_PASS }}
+          subject: "Nuevo comentario en tu sitio estático"
+          to: "tucorreo@ejemplo.com"
+          from: "Staticman Bot <tucorreo@ejemplo.com>"
+          body: |
+            Se ha recibido un nuevo comentario en tu sitio.
+            Revisa el Pull Request en GitHub:
+            https://github.com/${{ github.repository }}/pulls
