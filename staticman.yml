@@ -1,0 +1,16 @@
+comments:
+  allowedFields: ["name", "email", "message"]
+  branch: "main"
+  commitMessage: "Nuevo comentario"
+  filename: "entry-{@timestamp}"
+  format: "yaml"
+  path: "data/comments/{options.postId}"
+  moderation: true
+  requiredFields: ["name", "message"]
+  transforms:
+    email: md5
+  generatedFields:
+    date:
+      type: date
+      options:
+        format: iso8601
